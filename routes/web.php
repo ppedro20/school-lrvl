@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DisciplinaController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +17,7 @@ use App\Http\Controllers\DisciplinaController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'home')->name('root');;
 
 //Route::get('cursos', [CursoController::class, 'index'])->name('cursos.index');
 //Route::get('cursos/create', [CursoController::class, 'create'])->name('cursos.create');
@@ -29,3 +29,7 @@ Route::get('/', function () {
 Route::resource('cursos', CursoController::class);
 
 Route::resource('disciplinas', DisciplinaController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

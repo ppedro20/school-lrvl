@@ -1,28 +1,11 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0,
- maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cursos</title>
-    <style>
-        table,
-        th,
-        td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Lista de cursos</h1>
-    <p><a href="{{ route('cursos.create') }}">Criar novo curso</a></p>
-    <table>
-        <thead>
+@extends('layout')
+@section('header-title', 'Lista de Cursos')
+@section('main')
+    <p>
+        <a class="btn btn-success" href="{{ route('cursos.create') }}"><i class="fas fa-plus"></i> Criar novo curso</a>
+    </p>
+    <table class="table">
+        <thead class="table-dark">
             <tr>
                 <th>Abreviatura</th>
                 <th>Nome</th>
@@ -43,22 +26,21 @@
                     <td>{{ $curso->semestres }}</td>
                     <td>{{ $curso->vagas }}</td>
                     <td>
-                        <a href="{{ route('cursos.show', ['curso' => $curso]) }}">Consultar</a>
+                        <a class="btn btn-secondary" href="{{ route('cursos.show', ['curso' => $curso]) }}"><i class="fas fa-eye"></i>Consultar</a>
                     </td>
                     <td>
-                        <a href="{{ route('cursos.edit', ['curso' => $curso]) }}">Alterar</a>
+                        <a class="btn btn-dark" href="{{ route('cursos.edit', ['curso' => $curso]) }}"><i class="fas fa-edit"></i>Alterar</a>
                     </td>
                     <td>
                         <form method="POST" action="{{ route('cursos.destroy', ['curso' => $curso]) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" name="delete">Apagar</button>
+
+                            <button type="submit" name="delete" class="btn btn-danger"><i class="fas fa-trash"></i>Apagar</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</body>
-
-</html>
+@endsection

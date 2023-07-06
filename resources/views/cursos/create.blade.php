@@ -1,17 +1,6 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0,
- maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Curso</title>
-</head>
-
-<body>
+@extends('layout')
+@section('header-title', 'Criar novo curso')
+@section('main')
     <h2>Novo Curso</h2>
     <form method="POST" action="{{ route('cursos.store') }}">
         @csrf
@@ -20,6 +9,4 @@
         <button type="submit" name="ok">Guardar novo curso</button>
         </div>
         </form>
-</body>
-
-</html>
+@endsection
