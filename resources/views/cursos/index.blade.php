@@ -1,5 +1,12 @@
 @extends('layout')
 @section('header-title', 'Lista de Cursos')
+@section('subtitulo')
+ <ol class="breadcrumb">
+ <li class="breadcrumb-item">Gestão</li>
+ <li class="breadcrumb-item">Curricular</li>
+ <li class="breadcrumb-item active">Cursos</li>
+ </ol>
+@endsection
 @section('main')
     <p>
         <a class="btn btn-success" href="{{ route('cursos.create') }}"><i class="fas fa-plus"></i> Criar novo curso</a>
@@ -26,17 +33,17 @@
                     <td>{{ $curso->semestres }}</td>
                     <td>{{ $curso->vagas }}</td>
                     <td>
-                        <a class="btn btn-secondary" href="{{ route('cursos.show', ['curso' => $curso]) }}"><i class="fas fa-eye"></i>Consultar</a>
+                        <a class="btn btn-secondary" href="{{ route('cursos.show', ['curso' => $curso]) }}"><i class="fas fa-eye"></i></a>
                     </td>
                     <td>
-                        <a class="btn btn-dark" href="{{ route('cursos.edit', ['curso' => $curso]) }}"><i class="fas fa-edit"></i>Alterar</a>
+                        <a class="btn btn-dark" href="{{ route('cursos.edit', ['curso' => $curso]) }}"><i class="fas fa-edit"></i></a>
                     </td>
                     <td>
                         <form method="POST" action="{{ route('cursos.destroy', ['curso' => $curso]) }}">
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit" name="delete" class="btn btn-danger"><i class="fas fa-trash"></i>Apagar</button>
+                            <button type="submit" name="delete" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>

@@ -2,41 +2,47 @@
     $disabledStr = $readonlyData ?? false ? 'disabled' : '';
 @endphp
 
-<div>
-    <label for="inputAbr">Abreviatura</label>
-    <input type="text" name="abreviatura" id="inputAbr" {{ $disabledStr }} value="{{ $curso->abreviatura }}">
+<div class="mb-3 form-floating">
+    <input type="text" class="form-control" name="abreviatura" id="inputAbr" {{ $disabledStr }}
+        value="{{ $curso->abreviatura }}">
+    <label for="inputAbr" class="form-label">Abreviatura</label>
 </div>
-<div>
-    <label for="inputNome">Nome</label>
-    <input type="text" name="nome" id="inputNome" {{ $disabledStr }} value="{{ $curso->nome }}">
+<div class="mb-3 form-floating">
+    <input type="text" class="form-control" name="nome" id="inputNome" {{ $disabledStr }}
+        value="{{ $curso->nome }}">
+    <label for="inputNome" class="form-label">Nome</label>
 </div>
-<div>
-    <label for="inputTipo">Tipo de Curso</label>
-    <select name="tipo" id="inputTipo" {{ $disabledStr }}>
+<div class="mb-3 form-floating">
+    <select class="form-control" name="tipo" id="inputTipo" {{ $disabledStr }}>
         <option {{ $curso->tipo == 'Licenciatura' ? 'selected' : '' }}>Licenciatura</option>
         <option {{ $curso->tipo == 'Mestrado' ? 'selected' : '' }}>Mestrado</option>
         <option {{ $curso->tipo == 'Curso Técnico Superior Profissional' ? 'selected' : '' }}>Curso Técnico
             Superior Profissional</option>
     </select>
+    <label for="inputTipo" class="form-label">Tipo de Curso</label>
 </div>
-<div>
-    <label for="inputSemestres">Semestres</label>
-    <input type="text" name="semestres" id="inputSemestres" {{ $disabledStr }} value="{{ $curso->semestres }}">
+<div class="mb-3 form-floating">
+    <input type="text" class="form-control" name="semestres" id="inputSemestres" {{ $disabledStr }}
+        value="{{ $curso->semestres }}">
+    <label for="inputSemestres" class="form-label">Semestres</label>
 </div>
-<div>
-    <label for="inputECTS">ECTS</label>
-    <input type="text" name="ECTS" id="inputECTS" {{ $disabledStr }} value="{{ $curso->ECTS }}">
+<div class="mb-3 form-floating">
+    <input type="text" class="form-control" name="ECTS" id="inputECTS" {{ $disabledStr }}
+        value="{{ $curso->ECTS }}">
+    <label for="inputECTS" class="form-label">ECTS</label>
 </div>
-<div>
-    <label for="inputVagas">Vagas</label>
-    <input type="text" name="vagas" id="inputVagas" {{ $disabledStr }} value="{{ $curso->vagas }}">
+<div class="mb-3 form-floating">
+    <input type="text" class="form-control" name="vagas" id="inputVagas" {{ $disabledStr }}
+        value="{{ $curso->vagas }}">
+    <label for="inputVagas" class="form-label">Vagas</label>
 </div>
-<div>
-    <label for="inputContato">Contato</label>
-    <input type="text" name="contato" id="inputContato" {{ $disabledStr }} value="{{ $curso->contato }}">
+<div class="mb-3 form-floating">
+    <input type="text" class="form-control" name="contato" id="inputContato" {{ $disabledStr }}
+        value="{{ $curso->contato }}">
+    <label for="inputContato" class="form-label">Contato</label>
 </div>
-<div>
-    <label for="inputObjetivos">Objetivos</label>
-    <textarea name="objetivos" id="inputObjetivos" {{ $disabledStr }} rows=10>{{ $curso->objetivos }}
-    </textarea>
+<div class="mb-3 form-floating">
+    <textarea class="height-lg form-control" name="objetivos" id="inputObjetivos" {{ $disabledStr }} rows=10>{{ $curso->objetivos }}</textarea>
+    <label for="inputObjetivos" class="form-label">Objetivos</label>
 </div>
+

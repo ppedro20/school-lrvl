@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Models\Curso;
+use App\Http\Requests\DisciplinaRequest;
 
 
 class DisciplinaController extends Controller
 {
     public function index(): View
     {
-        $disciplinas = Disciplina::all();
+        $disciplinas = Disciplina::paginate(10);
         return view('disciplinas.index', compact('disciplinas'));
     }
 
@@ -26,9 +27,9 @@ class DisciplinaController extends Controller
             ->withCursos($cursos);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(DisciplinaRequest $request): RedirectResponse
     {
-        Disciplina::create($request->all());
+        Disciplina::create($request->validated());
         return redirect()->route('disciplinas.index');
     }
 
@@ -46,9 +47,9 @@ class DisciplinaController extends Controller
         return view('disciplinas.edit', ['disciplina' => $disciplina, 'cursos' => $cursos]);
     }
 
-    public function update(Request $request, Disciplina $disciplina): RedirectResponse
+    function update(DisciplinaRequest $request, Disciplina $disciplina): RedirectResponse
     {
-        $disciplina->update($request->all());
+        $disciplina->update($request->validated());
         return redirect()->route('disciplinas.index');
     }
 
