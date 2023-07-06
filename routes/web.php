@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\DisciplinaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,5 @@ Route::get('/', function () {
 //Route::delete('cursos/{curso}', [CursoController::class, 'destroy'])->name('cursos.destroy');
 //Route::get('cursos/{curso}', [CursoController::class, 'show'])->name('cursos.show');
 Route::resource('cursos', CursoController::class);
+
+Route::resource('disciplinas', DisciplinaController::class);
