@@ -12,10 +12,30 @@ use App\Http\Requests\DisciplinaRequest;
 
 class DisciplinaController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $disciplinas = Disciplina::paginate(10);
-        return view('disciplinas.index', compact('disciplinas'));
+        $cursos = Curso::all();
+        $filterByCurso = $request->curso ?? '';
+        $filterByAno = $request->ano ?? '';
+        $filterBySemestre = $request->semestre ?? '';
+        $disciplinaQuery = Disciplina::query();
+        if ($filterByCurso !== '') {
+            $disciplinaQuery->where('curso', $filterByCurso);
+        }
+        if ($filterByAno !== '') {
+            $disciplinaQuery->where('ano', $filterByAno);
+        }
+        if ($filterBySemestre !== '') {
+            $disciplinaQuery->where('semestre', $filterBySemestre);
+        }
+        $disciplinas = $disciplinaQuery->paginate(10);
+        return view('disciplinas.index', compact(
+            'disciplinas',
+            'cursos',
+            'filterByCurso',
+            'filterByAno',
+            'filterBySemestre'
+        ));
     }
 
     public function create(): View

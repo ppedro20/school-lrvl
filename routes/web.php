@@ -5,6 +5,9 @@ use App\Http\Controllers\CursoController;
 use App\Http\Controllers\DisciplinaController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DocenteController;
+use App\Models\Departamento;
+use App\Http\Controllers\DepartamentoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +36,8 @@ Route::resource('disciplinas', DisciplinaController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('docentes', DocenteController::class);
+Route::resource('departamentos', DepartamentoController::class);
+
+

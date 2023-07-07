@@ -6,23 +6,38 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class DisciplinaRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     */
     public function rules(): array
     {
         return [
-            'curso' => 'required|exists:cursos,abreviatura',
-            'ano' => 'required|integer|between:1,3',
-            'semestre' => 'required|in:0,1,2',
+            'curso' =>       'required|exists:cursos,abreviatura',
+            'ano' =>         'required|integer|between:1,3',
+            'semestre' =>    'required|in:0,1,2',
             'abreviatura' => 'required|string|max:20',
-            'nome' => 'required',
-            'ECTS' => 'required|integer|between:1,100',
-            'horas' => 'required|integer|between:1,1000',
-            'opcional' => 'required|boolean',
+            'nome' =>        'required',
+            'ECTS' =>        'required|integer|between:1,100',
+            'horas' =>       'required|integer|between:1,1000',
+            'opcional' =>    'required|boolean',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
     public function messages(): array
     {
         return [
