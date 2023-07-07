@@ -78,4 +78,8 @@ class DisciplinaController extends Controller
         $disciplina->delete();
         return redirect()->route('disciplinas.index');
     }
+    public function __construct()
+    {
+        $this->authorizeResource(Disciplina::class, 'disciplina');
+    }
 }

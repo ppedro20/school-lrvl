@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Aluno;
+use App\Models\Curso;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -23,6 +26,13 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+
+    public function showRegistrationForm()
+    {
+        $cursos = Curso::all();
+        return view('auth.register', compact('cursos'));
+    }
 
     /**
      * Where to redirect users after registration.
@@ -53,6 +63,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'genero' => ['required', 'in:M,F'],
+            'curso' => ['required', 'exists:cursos,abreviatura'],
+            'numero' => ['required', 'integer'],
         ]);
     }
 
@@ -64,10 +77,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        return DB::transaction(function () use ($data) {
+            $newUser = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'admin' => 0,
+                'tipo' => 'A',
+                'genero' => $data['genero'],
+            ]);
+            Aluno::create([
+                'user_id' => $newUser->id,
+                'numero' => $data['numero'],
+                'curso' => $data['curso'],
+            ]);
+            return $newUser;
+        });
     }
 }

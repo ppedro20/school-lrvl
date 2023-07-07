@@ -11,30 +11,36 @@ class CursoController extends Controller
 {
     public function index(): View
     {
+
         $allCursos = Curso::all();
         return view('cursos.index')->with('cursos', $allCursos);
     }
     public function create(): View
     {
+        $this->authorize('create', Curso::class);
         $newCurso = new Curso();
         return view('cursos.create')->withCurso($newCurso);
     }
     public function store(Request $request): RedirectResponse
     {
+        $this->authorize('create', Curso::class);
         Curso::create($request->all());
         return redirect()->route('cursos.index');
     }
     public function edit(Curso $curso): View
     {
+        $this->authorize('update', Curso::class);
         return view('cursos.edit')->withCurso($curso);
     }
     public function update(Request $request, Curso $curso): RedirectResponse
     {
+        $this->authorize('update', Curso::class);
         $curso->update($request->all());
         return redirect()->route('cursos.index');
     }
     public function destroy(Curso $curso): RedirectResponse
     {
+        $this->authorize('delete', Curso::class);
         $curso->delete();
         return redirect()->route('cursos.index');
     }
@@ -67,5 +73,9 @@ class CursoController extends Controller
         $cursos = Curso::pluck('abreviatura');
         $anos = $this->getDisciplinasOfCursoOrganizadas($curso);
         return view('planos_curriculares.index', compact('cursos', 'curso', 'anos'));
+    }
+    public function __construct()
+    {
+        $this->authorizeResource(Curso::class, 'curso');
     }
 }

@@ -52,8 +52,15 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Alterar Senha</a></li>
+                        @if ((Auth::user()->tipo ?? '') == 'A')
+                            <li><a class="dropdown-item"
+                                    href="{{ route('alunos.show', ['aluno' => Auth::user()->aluno]) }}">Perfil</a></li>
+                        @elseif ((Auth::user()->tipo ?? '') == 'D')
+                            <li><a class="dropdown-item"
+                                    href="{{ route('docentes.show', ['docente' => Auth::user()->docente]) }}">Perfil</a>
+                            </li>
+                        @endif
+                        <li><a class="dropdown-item" href="{{ route('password.change.show') }}">Alterar Senha</a></li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
