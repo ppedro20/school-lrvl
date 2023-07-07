@@ -116,8 +116,10 @@
                         <div class="collapse" id="collapseRecursosHumanos" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">Departamentos</a>
-                                <a class="nav-link" href="#">Docentes</a>
+                                <a class="nav-link {{ Route::currentRouteName() == 'departamentos.index' ? 'active' : '' }}"
+                                    href="{{ route('departamentos.index') }}">Departamentos</a>
+                                <a class="nav-link {{ Route::currentRouteName() == 'docentes.index' ? 'active' : '' }}"
+                                    href="{{ route('docentes.index') }}">Docentes</a>
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">Candidaturas</div>
