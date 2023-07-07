@@ -47,8 +47,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/img/avatar_unknown.png" alt="Avatar" class="bg-dark rounded-circle" width="45"
-                            height="45">
+                        <img src="{{ Auth::user()->fullPhotoUrl }}" alt="Avatar" class="bg-dark rounded-circle"
+                            width="45" height="45">
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -136,6 +136,10 @@
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon"><i class="fas fa-file-text"></i></div>
                             Minhas disciplinas
+                        </a>
+                        <a class="nav-link {{ Route::currentRouteName() == 'cart.show' ? 'active' : '' }}"
+                            href="{{ route('cart.show') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>Carrinho
                         </a>
                     </div>
                 </div>

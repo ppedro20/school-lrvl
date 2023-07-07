@@ -1,5 +1,7 @@
 @extends('layout')
-@section('header-title', 'Lista de Disciplinas')
+
+@section('titulo', 'Disciplinas')
+
 @section('subtitulo')
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Gestão</li>
@@ -7,8 +9,9 @@
         <li class="breadcrumb-item active">Disciplinas</li>
     </ol>
 @endsection
+
 @section('main')
-    <p><a class="btn btn-success" href="{{ route('disciplinas.create') }}"><i class="fas fa-plus"></i> Criar nova
+    <p><a class="btn btn-success" href="{{ route('disciplinas.create') }}"><i class="fas fa-plus"></i> &nbsp;Criar nova
             disciplina</a></p>
     <hr>
     <form method="GET" action="{{ route('disciplinas.index') }}">
@@ -16,7 +19,6 @@
             <div class="flex-grow-1 pe-2">
                 <div class="d-flex justify-content-between">
                     <div class="flex-grow-1 mb-3 form-floating">
-
                         <select class="form-select" name="curso" id="inputCurso">
                             <option {{ old('curso', $filterByCurso) === '' ? 'selected' : '' }} value="">
                                 Todos Cursos </option>
@@ -43,7 +45,8 @@
                     </div>
                     <div class="mb-3 flex-grow-1 form-floating">
                         <select class="form-select" name="semestre" id="inputSemestre">
-                            <option {{ old('semestre', $filterBySemestre) === '' ? 'selected' : '' }} value="">Todos
+                            <option {{ old('semestre', $filterBySemestre) === '' ? 'selected' : '' }} value="">
+                                Todos
                             </option>
                             <option {{ old('semestre', $filterBySemestre) == 0 ? 'selected' : '' }} value="0">Anual
                             </option>
@@ -63,44 +66,14 @@
             </div>
         </div>
     </form>
-    <table class="table">
-        <thead class="table-dark">
-            <tr>
-                <th>Abreviatura</th>
-                <th>Nome</th>
-                <th>Curso</th>
-                <th>Ano</th>
-                <th>Semestre</th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($disciplinas as $disciplina)
-                <tr>
-                    <td>{{ $disciplina->abreviatura }}</td>
-                    <td>{{ $disciplina->nome }}</td>
-                    <td>{{ $disciplina->cursoRef->tipo }} - {{ $disciplina->cursoRef->nome }}</td>
-                    <td>{{ $disciplina->ano }}</td>
-                    <td>{{ $disciplina->semestreStr }}</td>
-                    <td><a class="btn btn-secondary"
-                            href="{{ route('disciplinas.show', ['disciplina' => $disciplina]) }}"><i
-                                class="fas fa-eye"></a></td>
-                    <td><a class="btn btn-dark" href="{{ route('disciplinas.edit', ['disciplina' => $disciplina]) }}"><i
-                                class="fas fa-edit"></i></a></td>
-                    <td>
-                        <form method="POST" action="{{ route('disciplinas.destroy', ['disciplina' => $disciplina]) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" name="delete" class="btn btn-danger"><i
-                                    class="fas fa-trash"></i></button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    @include('disciplinas.shared.table', [
+        'disciplinas' => $disciplinas,
+        'showCurso' => true,
+        'showDetail' => true,
+        'showEdit' => true,
+        'showDelete' => true,
+        'showAddCart' => true,
+    ])
     <div>
         {{ $disciplinas->withQueryString()->links() }}
     </div>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DocenteController;
 use App\Models\Departamento;
 use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,15 @@ Route::resource('departamentos', DepartamentoController::class);
 Route::get('cursos/{curso}/plano', [CursoController::class, 'planoCurricular'])
  ->name('cursos.plano_curricular');
 
-
+// Add a "disciplina" to the cart:
+Route::post('cart/{disciplina}', [CartController::class, 'addToCart'])
+ ->name('cart.add');
+// Remove a "disciplina" from the cart:
+Route::delete('cart/{disciplina}', [CartController::class, 'removeFromCart'])
+->name('cart.remove');
+// Show the cart:
+Route::get('cart', [CartController::class, 'show'])->name('cart.show');
+// Confirm (store) the cart and save disciplinas registration on the database:
+Route::post('cart', [CartController::class, 'store'])->name('cart.store');
+// Clear the cart:
+Route::delete('cart', [CartController::class, 'destroy'])->name('cart.destroy');

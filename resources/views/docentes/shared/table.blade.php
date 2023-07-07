@@ -29,8 +29,12 @@
         @foreach ($docentes as $docente)
             <tr>
                 @if ($showFoto)
-                    <td><img src="/img/avatar_unknown.png" alt="Avatar" class="bg-dark rounded-circle" width="45"
-                            height="45"></td>
+                    <td width="45">
+                        @if ($aluno->user->url_foto)
+                            <img src="{{ $aluno->user->fullPhotoUrl }}" alt="Avatar" class="bg-dark rounded-circle"
+                                width="45" height="45">
+                        @endif
+                    </td>
                 @endif
                 <td>{{ $docente->user->name }}</td>
                 @if ($showDepartamento ?? true)

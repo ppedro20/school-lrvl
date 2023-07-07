@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -49,5 +50,14 @@ class User extends Authenticatable
     public function aluno(): HasOne
     {
         return $this->hasOne(Aluno::class);
+    }
+    protected function fullPhotoUrl(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->url_foto ? asset('storage/fotos/' . $this->url_foto) :
+                    asset('/img/avatar_unknown.png');
+            },
+        );
     }
 }

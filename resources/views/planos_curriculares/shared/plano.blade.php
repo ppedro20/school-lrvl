@@ -6,17 +6,22 @@
                 <table class="table">
                     <thead class="table-secondary">
                         <tr>
-                            <th colspan="3">{{ $semestre }}º semestre</th>
+                            <th colspan="4">{{ $semestre }}º semestre</th>
                         </tr>
+
                     </thead>
                     <tbody>
                         @foreach ($disciplinas as $disciplina)
                             <tr>
                                 <td>{{ $disciplina->abreviatura }}</td>
                                 <td>{{ $disciplina->nome }}</td>
-                                <td class="button-icon-col"><a class="btn btn-secondary"
-                                        href="{{ route('disciplinas.show', ['disciplina' => $disciplina]) }}">
-                                        <i class="fas fa-eye"></i></a></td>
+                                <td class="button-icon-col">
+                                    <form method="POST" action="{{ route('cart.add', ['disciplina' => $disciplina]) }}">
+                                        @csrf
+                                        <button type="submit" name="addToCart" class="btn btn-success">
+                                            <i class="fas fa-plus"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
