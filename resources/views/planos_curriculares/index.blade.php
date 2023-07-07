@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @extends('layout')
+=======
+@extends('template.layout')
+>>>>>>> master
 
 @section('titulo', 'Planos Curriculares')
 
