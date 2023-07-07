@@ -40,4 +40,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('docentes', DocenteController::class);
 Route::resource('departamentos', DepartamentoController::class);
 
+Route::get('cursos/{curso}/plano', [CursoController::class, 'planoCurricular'])
+ ->name('cursos.plano_curricular');
+
 

@@ -81,7 +81,8 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link {{ Route::currentRouteName() == 'cursos.plano_curricular' ? 'active' : '' }}"
+                            href="{{ route('cursos.plano_curricular', ['curso' => 'EI']) }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Planos Curriculares
                         </a>
